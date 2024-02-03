@@ -83,18 +83,13 @@ const findAndUpdate = (personName, done) => {
 
 	Person.findOneAndUpdate(
 		{ name: personName },
+		{ age: ageToSet },
+		{ new: true },
 		(err, data) => {
 			if (err) console.log(err);
 
-			data.age = ageToSet;
-
-			data.save((updateErr, updatedData) => {
-				if (updateErr) console.log(updateErr);
-
-				done(null, updatedData);
-			});
-		},
-		{ new: true }
+			done(null, data);
+		}
 	);
 
 	done(null /*, data*/);
