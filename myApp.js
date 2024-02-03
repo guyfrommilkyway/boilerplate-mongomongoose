@@ -69,9 +69,12 @@ const findEditThenSave = (personId, done) => {
 		if (err) console.log(err);
 
 		data.favoriteFoods.push(foodToAdd);
-		data.save();
 
-		done(null, data);
+		data.save((updateErr, updatedData) => {
+			if (updateErr) console.log(updateErr);
+
+			done(null, updatedData);
+		});
 	});
 };
 
